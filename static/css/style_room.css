@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.room {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.room_background {
+  position: absolute;
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  z-index: 0; 
+}
+
+.satellite-part {
+  position: absolute;
+  width: 100px;  /* Adjust according to image size */
+  height: 100px; /* Adjust according to image size */
+  cursor: pointer;
+  z-index: 2;
+}
+
+.satellite-part.glowing {
+  box-shadow: 0 0 10px 5px rgba(255, 255, 0, 1);  /* Glow effect */
+}
+
+
+.progress {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  font-size: 60px;
+  font-family: Arial, sans-serif;
+  z-index: 2;
+  background-color: yellow;     
+  color: black;                 
+  padding: 10px 20px;          
+  border-radius: 8px;            
+}
+
+
+.player {
+  position: absolute;
+  width: 180px;        
+  height: 180px;      
+  cursor: pointer;  
+  z-index: 2;      
+  background-color: transparent;
+}
+
+#player-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Make sure the player image fits within the div */
+}

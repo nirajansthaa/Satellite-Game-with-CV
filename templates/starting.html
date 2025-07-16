@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starting Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/starting_style.css') }}">
+</head>
+<body>
+    <div id="start-page">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-image: url('{{ url_for("static", filename="images/starting_background.gif") }}');
+                background-size: cover;
+                background-position: center;
+            }
+        </style>
+        <div id="welcome-container">
+            <h1>Welcome to LabelSat Game!</h1>
+            <p>You need to find the parts of satellite scattered around the room and assemble it.
+               Click below to start your journey:</p>
+            <button id="start-btn" onclick="window.location.href='{{ url_for('room_nav') }}'">Start Game</button>
+        </div>
+    </div>
+</body>
+</html>

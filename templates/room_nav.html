@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collect the Satellite Parts</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_room.css') }}">
+</head>
+<body>
+  <div class="game-container">
+    <div class="room">
+      <!-- Background Image representing the room -->
+      <img src="{{ url_for('static', filename='images/room_background.png') }}" class="room_background">
+      
+      <!-- Satellite Parts scattered around -->
+      <img src="{{ url_for('static', filename='images/satellite_base.png') }}" class="satellite-part" id="part1" style="top: 800px; left: 800px;">
+      <img src="{{ url_for('static', filename='images/solar_panel1.png') }}" class="satellite-part" id="part2" style="top: 550px; left: 250px;">
+      <img src="{{ url_for('static', filename='images/solar_panel2.png') }}" class="satellite-part" id="part3" style="top: 200px; left: 400px;">
+      <img src="{{ url_for('static', filename='images/solar_panel3.png') }}" class="satellite-part" id="part4" style="top: 600px; left: 2250px;">
+      <img src="{{ url_for('static', filename='images/solar_panel4.png') }}" class="satellite-part" id="part5" style="top: 450px; left: 1300px;">
+      <img src="{{ url_for('static', filename='images/antenna.png') }}" class="satellite-part" id="part6" style="top: 100px; left: 1050px;">
+      <img src="{{ url_for('static', filename='images/battery.png') }}" class="satellite-part" id="part7" style="top: 200px; left: 1800px;">
+    </div>
+
+    <!-- Player Image -->
+    <div id="player" class="player">
+      <img src="{{ url_for('static', filename='images/player.png') }}" id="player-img">
+    </div>
+    
+    <!-- Progress Tracker -->
+    <div class="progress">
+      <p>Collected: <span id="collected-count">0/7</span></p>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/room_nav.js') }}"></script>
+</body>
+</html>

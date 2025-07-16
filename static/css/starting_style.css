@@ -1,0 +1,42 @@
+
+
+/* Start page container */
+#start-page {
+    text-align: center;
+    color: white;
+    position: absolute; /* To overlay on top of the background */
+    z-index: 10;
+}
+
+/* Welcome text container */
+#welcome-container {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+/* Button styles */
+button {
+    padding: 10px 20px;
+    font-size: 1.5em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}

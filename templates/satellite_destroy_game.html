@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satellite Dodge Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/satellite_destroy.css') }}">
+</head>
+<body>
+    <h1>Satellite Dodge Game</h1>
+
+    <!-- Webcam Feed -->
+    <div id="webcam-container">
+        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    </div>
+
+    <div id="game-area">
+        <div id="game-area">
+    <!-- Virtual cursor container -->
+            <div id="virtual-cursor">
+                <img src="{{ url_for('static', filename='images/satellite_spaceship.png') }}" id="satellite-img">
+            </div>
+        </div>
+
+
+        <div id="asteroid-images" style="display: none;">
+            <img src="{{ url_for('static', filename='images/asteroid1.png') }}" id="asteroid1" data-src="{{ url_for('static', filename='images/asteroid1.png') }}">
+            <img src="{{ url_for('static', filename='images/asteroid2.png') }}" id="asteroid2" data-src="{{ url_for('static', filename='images/asteroid2.png') }}">
+        </div>
+
+
+        <!-- Asteroids Container -->
+        <div id="asteroids-container"></div>
+
+        <!-- Laser Container -->
+        <div id="laser-container"></div>
+
+    </div>
+
+    <!-- JavaScript files -->
+    <script src="{{ url_for('static', filename='js/satellite_destroy.js') }}"></script>
+</body>
+</html>

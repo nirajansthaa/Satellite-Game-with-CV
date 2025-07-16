@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabelSat – Drag and Drop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div id="title-image">
+        <img src="{{ url_for('static', filename='images/assemble.png') }}" alt="Satellite Title" id="satellite-title">
+    </div>
+
+     <img src="{{ url_for('static', filename='images/space_background.jpg') }}" alt="Background" id="background-image">
+    <!-- Webcam Feed -->
+    <div id="webcam-container">
+        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    </div>
+
+    <div id="game-area">
+        <div id="parts">
+            <img src="{{ url_for('static', filename='images/antenna1.png') }}" class="draggable" id="antenna" style="top: 10px; left: 50px;" data-initial-left="50px" data-initial-top="10px">
+            <img src="{{ url_for('static', filename='images/battery1.png') }}" class="draggable" id="battery" style="top: 10px; left: 180px;" data-initial-left="180px" data-initial-top="10px">
+            <img src="{{ url_for('static', filename='images/solar_panel11.png') }}" class="draggable" id="solar1" style="top: 120px; left: 50px;" data-initial-left="50px" data-initial-top="120px">
+            <img src="{{ url_for('static', filename='images/solar_panel22.png') }}" class="draggable" id="solar2" style="top: 120px; left: 180px;" data-initial-left="180px" data-initial-top="120px">
+            <img src="{{ url_for('static', filename='images/solar_panel33.png') }}" class="draggable" id="solar3" style="top: 220px; left: 50px;" data-initial-left="50px" data-initial-top="220px">
+            <img src="{{ url_for('static', filename='images/solar_panel44.png') }}" class="draggable" id="solar4" style="top: 220px; left: 180px;" data-initial-left="180px" data-initial-top="220px">
+        </div>
+
+        <!-- Virtual cursor (hand image) -->
+        <img id="virtual-cursor" src="{{ url_for('static', filename='images/hand.png') }}" style="position: absolute; width: 40px; height: 40px; pointer-events: none; z-index: 1000; transition: 0.05s, top 0.05s">
+
+        <!-- Finish Button -->
+        <button id="finish-button">Finish</button>
+
+        <!-- Video Container for the Satellite Launch Video (Initially Hidden) -->
+        <div id="launch-video-container" style="display: none;">
+            <video id="launch-video" width="100%" height="auto" controls>
+                <source src="{{ url_for('static', filename='images/satellite_launch.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Satellite Base Image -->
+        <div id="satellite">
+            <img src="{{ url_for('static', filename='images/satellite_base1.png') }}" id="satellite-img">
+        </div>
+    </div>
+
+    <!-- JavaScript files -->
+    <script src="{{ url_for('static', filename='js/track_cursor.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/satellite_launch.js') }}"></script>
+</body>
+</html>
