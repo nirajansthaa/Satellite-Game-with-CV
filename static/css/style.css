@@ -24,7 +24,7 @@ body, html {
     top: 20px; /* Add space from the top */
     left: 50%;
     transform: translateX(-50%); /* Center the image horizontally */
-    z-index: 10; /* Ensure it’s above other elements */
+    z-index: 10; /* Ensure it's above other elements */
 }
 
 /* Optional: Style the title image */
@@ -40,14 +40,20 @@ body, html {
     z-index: 10; /* Ensure it's above other elements */
 }
 
-/* Full-screen webcam feed */
+/* Full-screen webcam feed - UPDATED: Higher z-index when visible */
 #video-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Behind other elements */
+    z-index: -1; /* Behind other elements by default */
+}
+
+/* When video container is visible (has a specific class or when launch video is shown) */
+#video-container.active,
+#launch-video-container {
+    z-index: 999; /* Above everything when active */
 }
 
 /* Game area on top of webcam feed */
@@ -61,13 +67,13 @@ body, html {
     align-items: center;
 }
 
-/* Draggable satellite parts */
+/* Draggable satellite parts - UPDATED: Lower z-index */
 .draggable {
     width: 200px;  
     height: 200px;
     position: absolute;
     cursor: grab;
-    z-index: 10;
+    z-index: 5; /* Reduced from 10 to be below video when shown */
 }
 
 /* Style for Finish Button */
@@ -87,28 +93,32 @@ body, html {
     width: 200px;
     font-size: 50px;
     z-index: 10; /* Ensure it is above other content */
-    
 }
 
 #finish-button:hover {
     background-color: #45a049;
 }
 
-/* Satellite launch video container */
+/* Satellite launch video container - UPDATED: Much higher z-index */
 #launch-video-container {
     display: none; /* Initially hidden */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Center the video */
-    z-index: 15; /* Ensure the video appears above other elements */
+    z-index: 9999; /* INCREASED: Ensure the video appears above everything */
+    background-color: rgba(0, 0, 0, 0.8); /* Optional: Add semi-transparent background */
+    padding: 20px; /* Optional: Add some padding around the video */
+    border-radius: 10px; /* Optional: Rounded corners */
 }
 
-/* Styling the video */
+/* Styling the video - UPDATED: Better visibility */
 #launch-video {
     width: 100%; /* Make the video take up the full width of the container */
     max-width: 800px; /* Limit the maximum width of the video */
     height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: Rounded corners for the video */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); /* Optional: Add shadow for better visibility */
 }
 
 /* Virtual cursor */
@@ -120,4 +130,22 @@ body, html {
     background-size: contain;
     z-index: 1000;
     pointer-events: none;
+}
+
+/* Optional: Overlay to dim background when video is playing */
+#video-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9998; /* Just below the video container */
+}
+
+/* Show overlay when video is active */
+#launch-video-container:not([style*="display: none"]) ~ #video-overlay,
+#video-overlay.active {
+    display: block;
 }

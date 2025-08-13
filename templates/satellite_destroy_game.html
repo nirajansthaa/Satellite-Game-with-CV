@@ -37,7 +37,17 @@
 
     </div>
 
+    <audio id="explosion-sound" preload="auto">
+        <source src="/static/music/boom.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="background-music" preload="auto" loop>
+        <source src="/static/music/satellite_destroy_music.mp3" type="audio/mpeg">
+    </audio>
+
+
     <!-- JavaScript files -->
-    <script src="{{ url_for('static', filename='js/satellite_destroy.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/satellite_destroy.js') }}"></script> -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

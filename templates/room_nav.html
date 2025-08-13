@@ -6,7 +6,7 @@
   <title>Collect the Satellite Parts</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style_room.css') }}">
 </head>
-<body>
+
   <div class="game-container">
     <div class="room">
       <!-- Background Image representing the room -->
@@ -26,6 +26,10 @@
     <div id="player" class="player">
       <img src="{{ url_for('static', filename='images/player.png') }}" id="player-img">
     </div>
+
+     <div class="instructions">
+      Point your finger to move, make a fist to collect parts or Use WASD/Arrow keys as backup
+    </div>
     
     <!-- Progress Tracker -->
     <div class="progress">
@@ -33,6 +37,25 @@
     </div>
   </div>
 
-  <script src="{{ url_for('static', filename='js/room_nav.js') }}"></script>
-</body>
+  <div id="video-container">
+    <img src="{{ url_for('video_feed') }}" id="video-feed" alt="Webcam Feed">
+  </div>
+
+
+  <audio id="move-sound" src="{{ url_for('static', filename='music/move_sound.mp3') }}" preload="auto"></audio>
+  <audio id="collect-sound" src="{{ url_for('static', filename='music/collect_sound.mp3') }}" preload="auto"></audio>
+
+  <div id="parts-info-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>Satellite Parts Information</h2>
+      <ul id="parts-list"></ul>
+      <button id="close-modal" style="margin-top: 20px;">Close</button>
+    </div>
+  </div>
+
+  
+
+  <!-- <script src="{{ url_for('static', filename='js/room_nav.js') }}"></script> -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 </html>

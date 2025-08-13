@@ -1,54 +1,294 @@
 /* General Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #87c5ff; /* Sky blue */
+    background: linear-gradient(180deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    /* Space-themed dark gradient background */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden; /* Prevent scrollbars */
+    color: white;
+}
+
+/* Game title styling */
+h1 {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #00ffff;
+    text-shadow: 0 0 20px #00ffff;
+    font-size: 2.5rem;
+    margin: 0;
+    z-index: 1000;
     text-align: center;
+}
+
+/* Webcam container */
+#webcam-container {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    z-index: 1000;
+}
+
+#webcam-container img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
 }
 
 /* Game Area */
 #game-area {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: 
+        radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+        radial-gradient(2px 2px at 40% 70%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 40%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 10%, #fff, transparent),
+        radial-gradient(2px 2px at 10% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 80% 90%, #fff, transparent);
+    /* Starfield effect */
+    background-size: 100% 100%;
+    animation: twinkle 4s infinite;
+}
+
+/* Starfield animation */
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* Virtual cursor (satellite spaceship) */
+#virtual-cursor {
+    position: absolute;
+    z-index: 999;
+    transition: all 0.1s ease-out;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.6));
 }
 
 /* Satellite Image */
-#satellite img {
-    position: absolute;
-    width: 200px; /* Set the size of the satellite */
-    height: 300px; /* Set the size of the satellite */
-    z-index: 999;
-    bottom: 0; /* Start at the bottom */
-    left: 50%; /* Start at the center horizontally */
-    transform: translateX(-50%); /* Center the satellite */
+#satellite-img {
+    width: 250px !important;
+    height: 250px !important;
+    position: relative;
+    transition: transform 0.2s ease;
+    filter: brightness(1.1) saturate(1.2);
+}
+
+#satellite-img:hover {
+    transform: scale(1.05);
 }
 
 /* Laser Styling */
 .laser {
     position: absolute;
-    width: 3px;
-    height: 10px;
-    background-color: red;
-    z-index: 999;
+    width: 16px;
+    height: 70px;
+    background: linear-gradient(to top, #ff0000, #ff6600, #ffff00);
+    border-radius: 2px;
+    box-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 30px #ff0000;
+    z-index: 998;
+    animation: laser-glow 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes laser-glow {
+    0% { 
+        box-shadow: 
+            0 0 5px #ff0000,
+            0 0 10px #ff0000,
+            0 0 15px #ff0000;
+    }
+    100% { 
+        box-shadow: 
+            0 0 10px #ff0000,
+            0 0 20px #ff0000,
+            0 0 30px #ff0000;
+    }
 }
 
 /* Asteroid Styling */
 .asteroid {
     position: absolute;
-    width: 50px;
-    height: 50px;
-    background-size: cover;
-    z-index: 1;  /* Ensuring the asteroids are behind the satellite */
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
+    animation: asteroid-spin 3s linear infinite;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.7));
 }
 
-#webcam-container {
+@keyframes asteroid-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Container styling */
+#asteroids-container {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#laser-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+}
+
+#asteroid-images {
+    display: none;
+    height: 180px;
+    width: 180px;
+}
+
+/* Game UI Elements */
+.game-ui {
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    color: #00ffff;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px #00ffff;
+    z-index: 1000;
+}
+
+.score-display {
+    margin-bottom: 10px;
+}
+
+.health-display {
+    margin-bottom: 10px;
+}
+
+/* Instructions overlay */
+.instructions {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 1px solid #00ffff;
+    color: #00ffff;
+    text-align: center;
+    font-size: 0.9rem;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+/* Game Over screen */
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid #ff0000;
+    color: #ff0000;
+    text-align: center;
+    font-size: 2rem;
+    z-index: 2000;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+        top: 10px;
+    }
+    
+    #webcam-container {
+        width: 150px;
+        height: 100px;
+        top: 60px;
+        right: 10px;
+    }
+    
+    #webcam-container img {
+        width: 150px;
+        height: 100px;
+    }
+    
+    #satellite-img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    
+    .asteroid {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .instructions {
+        font-size: 0.8rem;
+        padding: 10px 15px;
+        bottom: 10px;
+    }
+}
+
+/* Performance optimizations */
+* {
+    box-sizing: border-box;
+}
+
+/* Smooth animations */
+.laser, .asteroid, #satellite-img {
+    will-change: transform;
+}
+
+/* Hide elements that might cause issues */
+img {
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Explosion animation */
+.explosion {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    z-index: 1500;
+    pointer-events: none;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0.3);
+        opacity: 1;
+    }
+    30% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }

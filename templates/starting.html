@@ -4,30 +4,172 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starting Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/starting_style.css') }}">
+
+    <!-- Sofia Font and Effects -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+
+    <style>
+        body {
+            font-family: "Sofia", sans-serif;
+            font-size: 30px;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('{{ url_for("static", filename="images/starting_background.gif") }}');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        #start-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        #welcome-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Apply font effects */
+        .font-effect-neon {
+            font-size: 4rem;
+            color: #f9d342;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000;
+        }
+
+        .font-effect-outline {
+            font-size: 4rem;
+            color: #ff6347;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .font-effect-emboss {
+            font-size: 4rem;
+            color: #ff6347;
+            text-shadow: 0px 1px 0px #fff, 0px -1px 0px #ddd, 1px 0px 0px #fff, -1px 0px 0px #ddd;
+        }
+
+        .font-effect-shadow-multiple {
+            font-size: 4rem;
+            color: #f9d342;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), -2px -2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        p {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ff6347;
+        }
+
+        #start-btn {
+            padding: 20px 40px;
+            font-size: 1.8rem;
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        #start-btn:hover {
+            background-color: #d93601;
+        }
+
+        #info-popup {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            display: none;
+        }
+
+        #info-popup button {
+            padding: 15px 30px;
+            font-size: 1.8rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #info-popup button:hover {
+            background-color: #218838;
+        }
+
+    </style>
 </head>
-<body>
+
+
     <div id="start-page">
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-image: url('{{ url_for("static", filename="images/starting_background.gif") }}');
-                background-size: cover;
-                background-position: center;
-            }
-        </style>
+        <!-- Background Music -->
+        <audio id="background-music" loop autoplay>
+            <source src="{{ url_for('static', filename='music/background_music.mp3') }}" type="audio/mpeg">
+            Your browser does not support the audio tag.
+        </audio>
+
+        <!-- Logos -->
+        <div id="logos-container">
+            <img src="{{ url_for('static', filename='images/logo1.png') }}" alt="Logo 1">
+        </div>  
+
+        <!-- Welcome Container -->
         <div id="welcome-container">
-            <h1>Welcome to LabelSat Game!</h1>
-            <p>You need to find the parts of satellite scattered around the room and assemble it.
-               Click below to start your journey:</p>
-            <button id="start-btn" onclick="window.location.href='{{ url_for('room_nav') }}'">Start Game</button>
+            <h1 class="font-effect-neon">Welcome to LabelSat Game!</h1> <!-- Applying Neon Effect -->
+            <p class="font-effect-outline">You need to find the parts of the satellite scattered around the room and assemble it.</p> <!-- Applying Outline Effect -->
+            <p class="font-effect-emboss">Click below to start your journey:</p> <!-- Applying Emboss Effect -->
+            <button id="start-btn" onclick="showInfoPopup()">Start Game</button>
+        </div>
+
+        <!-- Info Pop-Up (Initially Hidden) -->
+        <div id="info-popup">
+            <p><strong>Game Instructions:</strong></p>
+            <ul>
+                <li>Use arrow keys, 'w', 'a', 's', 'd' or hand gestures (up)👆 , (down) 👇 , (left) 👈 , (right)👉 to move the player.</li>
+                <li>Collect all parts of the satellite to move to next stage!</li>
+            </ul>
+            <button onclick="startGame()">Close and Start Game</button>
         </div>
     </div>
-</body>
+
+    <script>
+        // Function to show the info popup
+        function showInfoPopup() {
+            document.getElementById('info-popup').style.display = 'block';
+            document.getElementById('start-btn').style.display = 'none';  // Hide the Start Game button
+        }
+
+        // Function to start the game
+        function startGame() {
+            // Hide the info popup and show the game
+            document.getElementById('info-popup').style.display = 'none';
+            document.getElementById('start-btn').style.display = 'block';  // Optionally, show the button again
+
+            // Redirect to the room_nav page or initialize game logic here
+            window.location.href = '{{ url_for("room_nav") }}';  // You can also initialize game logic here if needed
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 </html>
